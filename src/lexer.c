@@ -2,8 +2,10 @@
 // Created by Patrick on 07/04/2021 - 12:37.
 //
 
+#include <stdio.h>
+
 #include "include/lexer.h"
 
-int toeknize(char* src) {
-
+token_T* tokenize(char* src) {
+    printf("TOKENIZING");
 }

@@ -32,10 +32,13 @@
 
 int parse(char* src) {
 //    printf("%i", sizeof(src));
-    int i = 0;
-    while(src[i] != EOF) {
-        printf("%i\n", src[i]);
-        i++;
-    }
+//    int i = 0;
+//    while(src[i] != EOF) {
+//        printf("%i\n", src[i]);
+//        i++;
+//    }
+
+
+    tokenize(src);
     return 0;
 }

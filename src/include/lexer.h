@@ -28,6 +28,6 @@ typedef struct {
 } token_T;
 
 
-int toeknize(char* src);
+token_T* tokenize(char* src);
 
 #endif //JSON_PARSER_LEXER_H
