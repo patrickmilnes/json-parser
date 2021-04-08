@@ -1,0 +1,5 @@
+{
+  "message": "hello",
+  "age": 21,
+  "labels": ["one", "two"]
+}
