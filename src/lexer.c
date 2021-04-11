@@ -7,7 +7,7 @@
 #include <string.h>
 #include "include/lexer.h"
 
-json_token_t* tokenize(const char* src) {
+token_node_s* tokenize(const char* src) {
     printf("TOKENIZING");
     for (int i = 0; i < strlen(src); i++) {
         printf("%c\n", src[i]);
@@ -16,9 +16,9 @@ json_token_t* tokenize(const char* src) {
     return 0;
 }
 
-json_token_t* create_token(char character, token_type_t type) {
+json_token_t* create_token(int position, token_type_t type) {
     json_token_t* result = (json_token_t*) malloc(sizeof(json_token_t));
-    result->value = character;
+    result->symbol_position = position;
     result->type = type;
     return result;
 }

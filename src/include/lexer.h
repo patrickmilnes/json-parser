@@ -5,6 +5,8 @@
 #ifndef JSON_PARSER_LEXER_H
 #define JSON_PARSER_LEXER_H
 
+#include "include/tokenlinkedlist.h"
+
 typedef enum {
     JSON_ID,
     JSON_INT,
@@ -21,11 +23,16 @@ typedef enum {
 } token_type_t;
 
 typedef struct {
-    char value;
+    int symbol_position;
     token_type_t type;
 } json_token_t;
 
-json_token_t* tokenize(const char* src);
-json_token_t* create_token(char character, token_type_t type);
+typedef struct {
+
+};
+
+token_node_s* tokenize(const char* src);
+json_token_t* create_token(int position, token_type_t type);
+int insert_into_symbol_armour();
 
 #endif //JSON_PARSER_LEXER_H

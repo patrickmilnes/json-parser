@@ -8,6 +8,7 @@
 #include <string.h>
 #include "include/lexer.h"
 #include "include/parser.h"
+#include "include/tokenlinkedlist.h"
 
 //typedef struct JsonValue {
 //    bool json_null;
@@ -33,6 +34,6 @@
 //}
 
 int parse(char* src) {
-    //json_token_t tokens[strlen(src)] = tokenize(src);
+    token_node_s* tokens = tokenize(src);
     return 0;
 }
