@@ -1,9 +1,11 @@
 //
 // Created by Patrick on 05/04/2021 - 22:31.
 //
+
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h> // For exit() function
+#include <string.h>
 #include "include/lexer.h"
 #include "include/parser.h"
 
@@ -31,14 +33,6 @@
 //}
 
 int parse(char* src) {
-//    printf("%i", sizeof(src));
-//    int i = 0;
-//    while(src[i] != EOF) {
-//        printf("%i\n", src[i]);
-//        i++;
-//    }
-
-
-    tokenize(src);
+    //json_token_t tokens[strlen(src)] = tokenize(src);
     return 0;
 }

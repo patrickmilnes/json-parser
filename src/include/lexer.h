@@ -13,21 +13,19 @@ typedef enum {
     JSON_ARRAY,
     JSON_BOOL,
     JSON_NULL,
-    JSON_LPARENTH,
-    JSON_RPARENTH,
     JSON_LBRACKET,
     JSON_RBRACKET,
     JSON_COMMA,
-    JSON_COLON
-} token_type;
-
+    JSON_COLON,
+    JSON_EOF
+} token_type_t;
 
 typedef struct {
-    char* value;
-    token_type type;
-} token_T;
+    char value;
+    token_type_t type;
+} json_token_t;
 
-
-token_T* tokenize(char* src);
+json_token_t* tokenize(const char* src);
+json_token_t* create_token(char character, token_type_t type);
 
 #endif //JSON_PARSER_LEXER_H
