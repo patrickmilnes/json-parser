@@ -15,6 +15,8 @@ typedef enum {
     JSON_NULL,
     JSON_LBRACKET,
     JSON_RBRACKET,
+    JSON_LBRACE,
+    JSON_RBRACE,
     JSON_COMMA,
     JSON_COLON,
     JSON_EOF

@@ -8,10 +8,32 @@
 #include "include/lexer.h"
 
 token_node_t* tokenize(const char* src) {
-    printf("TOKENIZING");
+    printf("TOKENIZING\n");
+    int position_increment = 0;
+    json_token_t* token;
     for (int i = 0; i < strlen(src); i++) {
-        printf("%c\n", src[i]);
+        if (src[i] != 32) {
+            printf("%c\n", src[i]);
+            // Create tokenes
+            switch (src[i]) {
+                case 123:
+                    printf("LBRACE\n");
+                    token = create_token(position_increment, JSON_LBRACE);
+                    insert_into_symbol_table(token);
+                    position_increment++;
+                    break;
 
+                case 125:
+                    printf("RBRACE\n");
+                    token = create_token(position_increment, JSON_RBRACE);
+                    insert_into_symbol_table(token);
+                    position_increment++;
+                    break;
+
+                default:
+                    break;
+            }
+        }
     }
     return 0;
 }
@@ -21,4 +43,8 @@ json_token_t* create_token(int position, token_type_t type) {
     result->symbol_position = position;
     result->type = type;
     return result;
+}
+
+int insert_into_symbol_table(json_token_t* token) {
+    return 0;
 }

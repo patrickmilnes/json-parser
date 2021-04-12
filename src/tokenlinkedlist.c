@@ -4,7 +4,6 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 #include "include/tokenlinkedlist.h"
 
 int get_count(token_node_t *head) {
