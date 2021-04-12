@@ -2,13 +2,8 @@
 // Created by Patrick on 05/04/2021 - 22:31.
 //
 
-#include <stdbool.h>
-#include <stdio.h>
-#include <stdlib.h> // For exit() function
-#include <string.h>
 #include "include/lexer.h"
 #include "include/parser.h"
-#include "include/tokenlinkedlist.h"
 
 //typedef struct JsonValue {
 //    bool json_null;
@@ -34,6 +29,6 @@
 //}
 
 int parse(char* src) {
-    token_node_s* tokens = tokenize(src);
+    token_node_t* tokens = tokenize(src);
     return 0;
 }

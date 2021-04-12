@@ -7,7 +7,7 @@
 #include <string.h>
 #include "include/lexer.h"
 
-token_node_s* tokenize(const char* src) {
+token_node_t* tokenize(const char* src) {
     printf("TOKENIZING");
     for (int i = 0; i < strlen(src); i++) {
         printf("%c\n", src[i]);
