@@ -9,17 +9,19 @@
 
 token_node_t* tokenize(const char* src) {
     printf("TOKENIZING\n");
+    token_node_t* head = (token_node_t*) malloc(sizeof(token_node_t));
     int position_increment = 0;
     json_token_t* token;
     for (int i = 0; i < strlen(src); i++) {
         if (src[i] != 32) {
             printf("%c\n", src[i]);
-            // Create tokenes
+            // Create tokens
             switch (src[i]) {
                 case 123:
                     printf("LBRACE\n");
                     token = create_token(position_increment, JSON_LBRACE);
-                    insert_into_symbol_table(token);
+                    token_node_t* node = create_node(token);
+                    prepend_node(&head, node);
                     position_increment++;
                     break;
 
@@ -35,6 +37,7 @@ token_node_t* tokenize(const char* src) {
             }
         }
     }
+    print_list(head);
     return 0;
 }
 

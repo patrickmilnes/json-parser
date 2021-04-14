@@ -27,7 +27,7 @@ void print_list(token_node_t* head) {
     token_node_t* temp = head;
     //memcpy(temp, head, sizeof(token_node_t));
     while(temp != NULL) {
-        printf("%i\n", temp->data->symbol_position);
+        printf("%i\n", temp->data->type);
         temp = temp->next;
     }
     free(temp);
