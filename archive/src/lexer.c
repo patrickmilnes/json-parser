@@ -51,3 +51,14 @@ json_token_t* create_token(int position, token_type_t type) {
 int insert_into_symbol_table(json_token_t* token) {
     return 0;
 }
+
+void flatten_tokens(token_node_t* head) {
+    token_node_t* temp = head;
+    while(temp != NULL) {
+        printf("%i\n", temp->data->type);
+        if(temp->data->type == temp->next->data->type) {
+            // Flatten some how
+        }
+        temp = temp->next;
+    }
+}
