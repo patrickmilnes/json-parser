@@ -1,14 +1,14 @@
-use std::num::ParseIntError;
+use std::fmt::{Debug};
 
 #[derive(Debug)]
 pub struct Token {
     index: i32,
-    symbol: char,
+    value: String,
     t_type: TokenType
 }
 
+#[derive(Debug)]
 pub enum TokenType {
-    ID,
     LPAREN,
     RPAREN,
     LBRACE,
@@ -18,26 +18,56 @@ pub enum TokenType {
     COLON,
     COMMA,
     NUMBER,
-    STRING,
+    VALUE,
     QUOTE
+}
+
+pub fn tokenizeV2(source: String) -> Vec<Token> {
+    let tokens: Vec<Token> = Vec::new();
+
+
+
+    return tokens;
 }
 
 pub fn tokenize(source: String) -> Vec<Token> {
     // println!("Creating tokens");
     let mut tokens = Vec::new();
-    let char_arr: Vec<char> = source.chars().collect();
+    let char_arr: Vec<char> = remove_whitespace(source).chars().collect();
     for n in 0..char_arr.len() {
-        println!("{}", n);
+        // println!("{}", n);
         let token_type: TokenType = get_token_type(char_arr[n]);
         let token = Token {
             index: 1,
-            symbol: char_arr[n],
+            value: char_arr[n].to_string(),
             t_type: token_type,
         };
         tokens.push(token);
     }
     
     return tokens;
+}
+
+fn flatten_string_tokens(tokens: Vec<Token>) -> Vec<Token> {
+    let flattened:Vec<Token> = Vec::new();
+    let length = tokens.len();
+    for n in 0..length {
+        match tokens[n].t_type {
+            TokenType::QUOTE => {
+                for x in n..length {
+
+                }
+            },
+
+            _ => continue,
+        }
+    }
+
+    return flattened;
+}
+
+fn remove_whitespace(s: String) -> String {
+    s.chars().filter(|c| !c.is_whitespace()).collect()
 }
 
 fn get_token_type(symbol: char) -> TokenType {
@@ -51,7 +81,6 @@ fn get_token_type(symbol: char) -> TokenType {
         ':' => TokenType::COLON,
         ',' => TokenType::COMMA,
         '"' => TokenType::QUOTE,
-         _  => TokenType::ID,
+        _   => TokenType::VALUE,
     }
 }
-
