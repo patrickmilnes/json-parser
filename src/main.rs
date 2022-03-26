@@ -4,7 +4,6 @@ mod test;
 use crate::lexer::{Token, tokenizeV2};
 
 fn main() {
-    println!("Hello World");
     let json_code = String::from("{
         \"name\": \"Patrick\", 
         \"age\": 88, 
