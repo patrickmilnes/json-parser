@@ -1,6 +1,7 @@
 mod lexer;
+mod test;
 
-use crate::lexer::{Token, tokenize};
+use crate::lexer::{Token, tokenizeV2};
 
 fn main() {
     println!("Hello World");
@@ -9,7 +10,7 @@ fn main() {
         \"age\": 88, 
         \"things\": [1, 2, 3] 
     }");
-    let tokens: Vec<Token> = tokenize(json_code);
+    let tokens: Vec<Token> = tokenizeV2(json_code);
     for tok in tokens {
         println!("{:?}", tok);
     }
