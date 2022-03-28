@@ -1,13 +1,6 @@
 #[cfg(test)]
 mod tests {
-    use crate::lexer::{
-        create_token,
-        extract_string,
-        remove_whitespace,
-        StringHead,
-        Token,
-        TokenType
-    };
+    use crate::lexer::{create_token, extract_string, get_token_type, remove_whitespace, StringHead, Token, TokenType};
 
     #[test]
     fn remove_whitespace_returns_retcon() {
@@ -32,5 +25,16 @@ mod tests {
         };
         let tok2 = create_token(1, String::from("hello"), TokenType::STRING);
         assert_eq!(tok1, tok2);
+    }
+
+    #[test]
+    fn get_token_type_returns_TokenType() {
+        let tok_t1: Result<TokenType, String> = get_token_type('[');
+        let tok_t2: Result<TokenType, String> = get_token_type('{');
+        let tok_t3: Result<TokenType, String> = get_token_type('%');
+
+        assert_eq!(tok_t1, Ok(TokenType::LBRACKET));
+        assert_eq!(tok_t2, Ok(TokenType::LBRACE));
+        assert_eq!(tok_t3, Err(String::from("Symbol % is not part of JSON")));
     }
 }

@@ -1,4 +1,5 @@
 use std::fmt::{Debug};
+pub use crate::utils::{create_err_msg};
 
 #[derive(Debug, Eq, PartialEq)]
 pub struct Token {
@@ -43,16 +44,22 @@ pub fn tokenizeV2(source: String) -> Vec<Token> {
                 tokens.push(tok);
                 head = string_head.0 + 1;
             }
-            _ => {
-                let t: TokenType = get_token_type(curr);
-                let tok: Token = create_token(0, String::from(curr), t);
-                tokens.push(tok);
-                head = head + 1;
-            }
+            _ => handle_std_symbol(&char_arr, &mut tokens, &mut head),
         }
     }
 
     return tokens;
+}
+
+pub fn handle_std_symbol(char_arr: &Vec<char>, tok_list: &mut Vec<Token>, head: &mut usize) {
+    let tok_res: Result<TokenType, String> = get_token_type(char_arr[*head]);
+    let tok_t = match tok_res {
+        Ok(t)   => t,
+        Err(t)      => create_err_msg(t),
+    };
+    let tok: Token = create_token(0, String::from(char_arr[*head]), tok_t);
+    tok_list.push(tok);
+    *head += 1;
 }
 
 pub fn extract_string(char_arr: &Vec<char>, mut head: usize) -> StringHead {
@@ -74,12 +81,7 @@ pub fn extract_string(char_arr: &Vec<char>, mut head: usize) -> StringHead {
 }
 
 pub fn create_token(index: i32, value: String, t_type: TokenType) -> Token {
-    let tok: Token = Token {
-        index: index,
-        value: value,
-        t_type: t_type,
-    };
-
+    let tok: Token = Token { index, value, t_type, };
     return tok;
 }
 
@@ -87,17 +89,18 @@ pub fn remove_whitespace(s: String) -> String {
     s.chars().filter(|c| !c.is_whitespace()).collect()
 }
 
-fn get_token_type(symbol: char) -> TokenType {
+pub fn get_token_type(symbol: char) -> Result<TokenType, String> {
     match symbol {
-        '(' => TokenType::LPAREN,
-        ')' => TokenType::RPAREN,
-        '{' => TokenType::LBRACE,
-        '}' => TokenType::RBRACE,
-        '[' => TokenType::LBRACKET,
-        ']' => TokenType::RBRACKET,
-        ':' => TokenType::COLON,
-        ',' => TokenType::COMMA,
-        '"' => TokenType::QUOTE,
-        _   => TokenType::VALUE,
+        '('         => Ok(TokenType::LPAREN),
+        ')'         => Ok(TokenType::RPAREN),
+        '{'         => Ok(TokenType::LBRACE),
+        '}'         => Ok(TokenType::RBRACE),
+        '['         => Ok(TokenType::LBRACKET),
+        ']'         => Ok(TokenType::RBRACKET),
+        ':'         => Ok(TokenType::COLON),
+        ','         => Ok(TokenType::COMMA),
+        '"'         => Ok(TokenType::QUOTE),
+        'a'..='z'   => Ok(TokenType::VALUE),
+        _           => Err(String::from("Character not within syntax")),
     }
 }
